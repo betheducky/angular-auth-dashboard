@@ -1,27 +1,38 @@
-# AngularAuthDashboard
+# Angular Authenticated Dashboard ( 🚧 Work in Progress)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.2.0.
+This project is a skill-up build focused on implementing a production-style authentication architecture in Angular. My goal is to practice and demonstrate how a real application handles authentication, protected routes, and authenticated API communication on the frontend.
 
-## Development server
+---
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Current Status
 
-## Code scaffolding
+Work in progress — building incrementally.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+---
 
-## Build
+## Project Goals
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+This project focuses on implementing the core pieces of a modern auth workflow:
 
-## Running unit tests
+- Authentication state management
+- Login & registration forms using reactive forms
+- Route protection with guards
+- HTTP interceptor for attaching auth tokens
+- Protected dashboard data flow
+- Clean, scalable Angular project structure
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+---
 
-## Running end-to-end tests
+## Tech Stack
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+- Angular
+- TypeScript
+- RxJS
+- Angular Router
+- Reactive Forms
 
-## Further help
+---
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Purpose of This Project
+
+This is not a full production product but instead a focused architecture exercise meant to demonstrate frontend authentication patterns used in real applications.
