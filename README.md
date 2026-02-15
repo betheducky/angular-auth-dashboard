@@ -1,4 +1,4 @@
-# Angular Authenticated Dashboard ( 🚧 Work in Progress)
+# Angular Authenticated Dashboard
 
 This project is a skill-up build focused on implementing a production-style authentication architecture in Angular. My goal is to practice and demonstrate how a real application handles authentication, protected routes, and authenticated API communication on the frontend.
 
