@@ -4,9 +4,7 @@ This project is a skill-up build focused on implementing a production-style auth
 
 ---
 
-## Current Status
-
-Work in progress — building incrementally.
+## Current Status: IN PROGRESS
 
 ---
 
