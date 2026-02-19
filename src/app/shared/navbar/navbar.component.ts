@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import { AuthService } from '../../core/service/auth.service';
+import { User } from '../../models/user.model';
+import { Router } from '@angular/router';
+import { Input } from '@angular/core';
 
 @Component({
   selector: 'app-navbar',
@@ -8,5 +12,14 @@ import { Component } from '@angular/core';
   styleUrl: './navbar.component.scss'
 })
 export class NavbarComponent {
+
+  @Input() user: User | null = null;
+
+  constructor(private authService: AuthService, private router: Router){}
+
+  logout() {
+    this.authService.logout();
+    this.router.navigate(['/login']);
+  }
 
 }
