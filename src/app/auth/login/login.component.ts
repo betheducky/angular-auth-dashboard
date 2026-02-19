@@ -6,7 +6,7 @@ import { FormsModule, ReactiveFormsModule, FormBuilder, Validators } from '@angu
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [],
+  imports: [FormsModule, ReactiveFormsModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
@@ -15,17 +15,15 @@ export class LoginComponent {
   constructor(private authService: AuthService, private router: Router, private fb: FormBuilder){}
 
   loginForm = this.fb.group({
-    email: ['', Validators.email, Validators.required],
-    password: ['', Validators.minLength(8), Validators.maxLength(20)]
+    email: ['', [Validators.email, Validators.required]],
+    password: ['', [Validators.minLength(8), Validators.maxLength(20)]]
   });
 
   registerForm = this.fb.group({
-    username: ['', Validators.minLength(5), Validators.maxLength(12), Validators.required],
-    password: ['', Validators.minLength(8), Validators.maxLength(20)],
-    confirmPassword: ['', Validators.minLength(8), Validators.maxLength(20)]
+    username: ['', [Validators.minLength(5), Validators.maxLength(12), Validators.required]],
+    password: ['', [Validators.minLength(8), Validators.maxLength(20)]],
+    confirmPassword: ['', [Validators.minLength(8), Validators.maxLength(20)]]
   })
-
-
 
   handleLogin() {
     this.authService.login(this.loginForm.value).subscribe(() => {

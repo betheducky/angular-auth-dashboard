@@ -1,1 +1,8 @@
-<p>login works!</p>
+<h1>Dashboard Login</h1>
+<form [formGroup]="loginForm">
+    <label for="email">Email</label>
+    <input type="text" placeholder="Enter email..." formControlName="email">
+    <label for="password">Password</label>
+    <input type="text" placeholder="*****" formControlName="password">
+    <button (ngSubmit)="handleLogin()">Login</button>
+</form>

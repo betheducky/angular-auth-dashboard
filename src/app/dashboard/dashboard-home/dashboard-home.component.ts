@@ -3,6 +3,7 @@ import { DashboardService } from '../../core/service/dashboard.service';
 import { NavbarComponent } from '../../shared/navbar/navbar.component';
 import { User } from '../../models/user.model';
 import { AuthService } from '../../core/service/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard-home',
@@ -17,10 +18,10 @@ export class DashboardHomeComponent implements OnInit {
   currentUser: User | null = null;
 
 
-  constructor(private dashboardService: DashboardService, private authService: AuthService){
+  constructor(private dashboardService: DashboardService, private authService: AuthService, private router: Router){
     this.authService.currentUser$.subscribe(user => {
       this.currentUser = user;
-    } )
+    })
   }
 
   ngOnInit(): void {
