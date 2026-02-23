@@ -9,7 +9,6 @@ import { environment } from '../../environment/environment';
 export class DashboardService {
 
   getDashboardData() {
-    return this.http.get(`${environment.apiUrl}/dashboard`);
   }
 
   constructor(private http: HttpClient) {}

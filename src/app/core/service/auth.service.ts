@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
 import { User } from '../../models/user.model';
-import { AuthResponse } from '../../models/auth-response.model';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environment/environment';
-import { tap } from 'rxjs';
+import { of, delay, tap, throwError, BehaviorSubject } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
+  private storageKey: string = 'authUser';
   private currentUserSubject = new BehaviorSubject<User | null>(null);
   currentUser$ = this.currentUserSubject.asObservable();
 
@@ -23,36 +23,62 @@ export class AuthService {
   }
 
   constructor(private http: HttpClient) {
-    const storedUser = localStorage.getItem('user');
-    if(storedUser){
-      this.currentUserSubject.next(JSON.parse(storedUser));
+    const authorizedUser = localStorage.getItem(this.storageKey);
+    if(authorizedUser){
+      this.currentUserSubject.next(JSON.parse(authorizedUser));
     }
    }
 
    login(credentials: any) {
-    return this.http.post<AuthResponse>(`${environment.apiUrl}/login`, credentials)
-    .pipe(
+
+    const DEMO_EMAIL = 'demo@email.com';
+    const DEMO_PASSWORD = 'password';
+
+    if(credentials.email === DEMO_EMAIL
+      && credentials.password === DEMO_PASSWORD) {
+        const user: User = {
+        id: 1,
+        name: "Demo User",
+        email: credentials.email,
+        createdAt: new Date()
+    }
+
+      return of(user).pipe(
+        delay(800),
+        tap(u => {
+          localStorage.setItem(this.storageKey, JSON.stringify(u));
+          this.currentUserSubject.next(u);
+        })
+      )
+    }
+
+    return throwError(() => new Error('Invalid Credentials'));
+    
+   }
+
+   register(credentials: any) {
+
+    const newUser: User = {
+      id: 1,
+      name: credentials.name,
+      email: credentials.email,
+      createdAt: new Date()
+    }
+
+    return of(newUser).pipe(
+      delay(800),
       tap(res => {
-        localStorage.setItem('user', JSON.stringify(res.user));
-        this.currentUserSubject.next(res.user);
+        localStorage.setItem(this.storageKey, JSON.stringify(res));
+        this.currentUserSubject.next(res);
       })
     );
    }
 
-   register(credentials: any) {
-    return this.http.post<AuthResponse>(`${environment.apiUrl}/register`, credentials)
-    .pipe(
-      tap(res => {
-        localStorage.setItem('user', JSON.stringify(res.user));
-        this.currentUserSubject.next(res.user);
-      })
-    )
-   }
 
    logout() {
-    localStorage.removeItem('user');
+    localStorage.removeItem(this.storageKey);
     this.currentUserSubject.next(null);
    }
 
-
+   
 }
