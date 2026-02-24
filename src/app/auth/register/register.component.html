@@ -1,1 +1,13 @@
-<p>register works!</p>
+<h1>Register</h1>
+<app-navbar [user]="currentUser"></app-navbar>
+<form [formGroup]="registerForm">
+    <label for="name">Name</label>
+    <input type="text" placeholder="Enter name..." formControlName="name">
+    <label for="email">Email</label>
+    <input type="text" placeholder="Enter email..." formControlName="email">
+    <label for="password">Password</label>
+    <input type="text" placeholder="*****" formControlName="password">
+    <label for="confirmPassword">Confirm Password</label>
+    <input type="text" formControlName="confirmPassword" >
+    <button (ngSubmit)="handleRegister()" [disabled]="registerForm.invalid">Register</button>
+</form>

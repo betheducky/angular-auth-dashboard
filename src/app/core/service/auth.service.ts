@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { User } from '../../models/user.model';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../environment/environment';
 import { of, delay, tap, throwError, BehaviorSubject } from 'rxjs';
+import { LoginRequest, RegisterRequest } from '../../models/auth.model';
 
 
 @Injectable({
@@ -29,7 +29,7 @@ export class AuthService {
     }
    }
 
-   login(credentials: any) {
+   login(credentials: LoginRequest) {
 
     const DEMO_EMAIL = 'demo@email.com';
     const DEMO_PASSWORD = 'password';
@@ -56,7 +56,7 @@ export class AuthService {
     
    }
 
-   register(credentials: any) {
+   register(credentials: RegisterRequest) {
 
     const newUser: User = {
       id: 1,

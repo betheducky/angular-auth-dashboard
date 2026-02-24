@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { DashboardService } from '../../core/service/dashboard.service';
 import { NavbarComponent } from '../../shared/navbar/navbar.component';
 import { User } from '../../models/user.model';
 import { AuthService } from '../../core/service/auth.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard-home',
@@ -12,20 +11,18 @@ import { Router } from '@angular/router';
   templateUrl: './dashboard-home.component.html',
   styleUrl: './dashboard-home.component.scss'
 })
-export class DashboardHomeComponent implements OnInit {
+export class DashboardHomeComponent {
 
-  data: any;
   currentUser: User | null = null;
 
-
-  constructor(private dashboardService: DashboardService, private authService: AuthService, private router: Router){
+  constructor(private dashboardService: DashboardService, private authService: AuthService){
     this.authService.currentUser$.subscribe(user => {
       this.currentUser = user;
-    })
-  }
+    });
 
-  ngOnInit(): void {
-      this.dashboardService.getDashboardData().subscribe(data => this.data = data)
+    if(this.currentUser) {
+      this.dashboardService.getDashboardData();
+    }
   }
 
 }

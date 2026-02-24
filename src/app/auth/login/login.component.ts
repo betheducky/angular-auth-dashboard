@@ -1,40 +1,35 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../core/service/auth.service';
 import { Router } from '@angular/router';
-import { FormsModule, ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, Validators, NonNullableFormBuilder } from '@angular/forms';
+import { NavbarComponent } from '../../shared/navbar/navbar.component';
+import { User } from '../../models/user.model';
+import { LoginRequest } from '../../models/auth.model';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule],
+  imports: [FormsModule, ReactiveFormsModule, NavbarComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
 export class LoginComponent {
 
-  constructor(private authService: AuthService, private router: Router, private fb: FormBuilder){}
+  currentUser: User | null = null;
+
+  constructor(private authService: AuthService, private router: Router, private fb: NonNullableFormBuilder){}
 
   loginForm = this.fb.group({
     email: ['', [Validators.email, Validators.required]],
-    password: ['', [Validators.minLength(8), Validators.maxLength(20)]]
+    password: ['', [Validators.minLength(8), Validators.maxLength(20), Validators.required]]
   });
 
-  registerForm = this.fb.group({
-    username: ['', [Validators.minLength(5), Validators.maxLength(12), Validators.required]],
-    password: ['', [Validators.minLength(8), Validators.maxLength(20)]],
-    confirmPassword: ['', [Validators.minLength(8), Validators.maxLength(20)]]
-  })
-
   handleLogin() {
-    this.authService.login(this.loginForm.value).subscribe(() => {
+    if(this.loginForm.invalid) return;
+
+    const request: LoginRequest = this.loginForm.getRawValue();
+    this.authService.login(request).subscribe(() => {
       this.router.navigate(['/dashboard']);
     })
   }
-
-  handleRegister() {
-    this.authService.register(this.registerForm.value).subscribe(() => {
-      this.router.navigate(['/dashboard']);
-    })
-  }
-
 }

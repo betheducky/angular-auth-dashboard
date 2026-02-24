@@ -1,8 +1,9 @@
 <h1>Dashboard Login</h1>
+<app-navbar [user]="currentUser"></app-navbar>
 <form [formGroup]="loginForm">
     <label for="email">Email</label>
     <input type="text" placeholder="Enter email..." formControlName="email">
     <label for="password">Password</label>
     <input type="text" placeholder="*****" formControlName="password">
-    <button (ngSubmit)="handleLogin()">Login</button>
+    <button (click)="handleLogin()" [disabled]="loginForm.invalid">Login</button>
 </form>
