@@ -52,7 +52,9 @@ export class AuthService {
       )
     }
 
-    return throwError(() => new Error('Invalid Credentials'));
+    return throwError(() => ({
+      type: 'INVALID_CREDENTIALS'
+    }));
     
    }
 

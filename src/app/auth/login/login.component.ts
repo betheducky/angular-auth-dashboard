@@ -28,8 +28,15 @@ export class LoginComponent {
     if(this.loginForm.invalid) return;
 
     const request: LoginRequest = this.loginForm.getRawValue();
-    this.authService.login(request).subscribe(() => {
+    this.authService.login(request).subscribe({
+      next: () => {
       this.router.navigate(['/dashboard']);
-    })
+    },
+      error: (err) => {
+        if(err.type === 'INVALID_CREDENTIALS'){
+          this.loginForm.setErrors({ invalidCredentials: true });
+        }
+    }
+  })
   }
 }

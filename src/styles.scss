@@ -1,8 +1,31 @@
-nav {
-    display: flex;
+body {
+    background-color: rgb(235, 235, 235);
 }
 
 form {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    width: 50%;
+    margin: auto;
 }
+
+h1 {
+    text-align: center;
+    margin-top: 7rem;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+}
+
+.form-group {
+    padding: .5rem 0;
+}
+
+.submit-btn {
+    margin-top: 1.5rem;
+}
+
+

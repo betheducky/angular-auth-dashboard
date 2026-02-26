@@ -1,8 +1,9 @@
 <nav>
-    @if(!user){
-        <button (click)="routeToLogin()">Login</button>
-        <button (click)="routeToRegister()">Register</button> 
-    } @else {
-        <button (click)="handleLogout()">Logout</button>
-    }
+          @if(!user){
+            <button class="btn" type="button" (click)="routeToLogin()">Login</button>
+            <button class="btn" type="button" (click)="routeToRegister()">Register</button> 
+        
+        } @else {
+            <button class="btn" type="button" (click)="handleLogout()">Logout</button>
+        }      
 </nav>
