@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule, Validators, NonNullableFormBuilder } 
 import { User } from '../../models/user.model';
 import { NavbarComponent } from '../../shared/navbar/navbar.component';
 import { RegisterRequest } from '../../models/auth.model';
+import { ValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
@@ -16,15 +17,28 @@ import { RegisterRequest } from '../../models/auth.model';
 export class RegisterComponent {
 
   currentUser: User | null = null;
+  hide: boolean = true;
+
+  // CHECK IF VALID
+
+  passwordMatchValidator: ValidatorFn = (group: AbstractControl): ValidationErrors | null => {
+    const pw = group.get('password')?.value;
+    const confirm = group.get('confirmPassword')?.value;
+    return confirm === pw ? null : {mismatch: true}
+  }
 
   registerForm = this.fb.group({
     name: ['', [Validators.minLength(5), Validators.maxLength(15), Validators.required]],
     email: ['', [Validators.email, Validators.required]],
     password: ['', [Validators.minLength(8), Validators.maxLength(20), Validators.required]],
-    confirmPassword: ['', [Validators.minLength(8), Validators.maxLength(20), Validators.required]]
-  })
+    confirmPassword: ['', [Validators.minLength(8), Validators.maxLength(20), Validators.required]],
+  }, { validators: this.passwordMatchValidator})
 
   constructor(private router: Router, private authService: AuthService, private fb: NonNullableFormBuilder){}
+
+  toggleHidePassword(): void {
+    this.hide = !this.hide;
+  }
 
   handleRegister() {
     if(this.registerForm.invalid) return;

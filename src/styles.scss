@@ -1,5 +1,5 @@
 body {
-    background-color: rgb(235, 235, 235);
+    background-color: rgb(246, 246, 246);
 }
 
 form {
@@ -24,8 +24,22 @@ nav {
     padding: .5rem 0;
 }
 
-.submit-btn {
+.password-container {
+    display: flex;
+}
+
+.action-btn, .form-errors {
     margin-top: 1.5rem;
 }
 
+.error-msg {
+    color: red;
+    font-size: .75rem;
+    margin-left: 1rem;
+}
 
+.form-errors {
+    color: red;
+    text-align: center;
+    font-style: italic;
+}

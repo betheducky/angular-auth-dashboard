@@ -16,6 +16,7 @@ import { LoginRequest } from '../../models/auth.model';
 export class LoginComponent {
 
   currentUser: User | null = null;
+  hide: boolean = true;
 
   constructor(private authService: AuthService, private router: Router, private fb: NonNullableFormBuilder){}
 
@@ -38,5 +39,9 @@ export class LoginComponent {
         }
     }
   })
+  }
+
+  toggleHidePassword(): void {
+    this.hide = !this.hide;
   }
 }
