@@ -1,1 +1,80 @@
-<p>dashboard-home works!</p>
+@if(currentUserData$ | async; as user){
+    <h1>Welcome {{ user.name }}</h1>
+}
+<app-navbar [user]="currentUserData$"></app-navbar>
+@if(dashboardData$ | async; as data){
+    <section class="first-section">
+        <h3 class="section-title">Productivity Summary</h3>
+        <div id="statCarousel" class="carousel slide">
+            <div class="carousel-inner">
+                <div class="carousel-item active carousel-card">
+                    <h5>Alert Count</h5>
+                    <p class="productivity-summary-text">{{data.stats.alertCount}}</p>
+                </div>
+                <div class="carousel-item carousel-card">
+                    <h5>Info Message</h5>
+                    <p class="productivity-summary-text">{{data.stats.infoMessage}}</p>
+                </div>
+                <div class="carousel-item carousel-card">
+                    <h5>Project Count</h5>
+                    <p class="productivity-summary-text">{{data.stats.projectCount}}</p>
+                </div>
+                <div class="carousel-item carousel-card">
+                    <h5>Task Count</h5>
+                    <p class="productivity-summary-text">{{data.stats.taskCount}}</p>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#statCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#statCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </section>
+    <section class="second-section">
+        <div class="section-sub-container">
+            <h3 class="section-title">Projects</h3>
+            <ul>
+                @if(data.projects){
+                    @for(project of data.projects; track project){
+                        <li>{{project}}</li>
+                    }
+                }
+            </ul>
+        </div>
+        <div class="section-sub-container">
+            <h3 class="section-title">Tasks</h3>
+            <ul>
+                @if(data.tasks){
+                    @for(task of data.tasks; track task){
+                        <li>{{task}}</li>
+                    }
+                }
+            </ul>
+        </div>
+        <div class="section-sub-container">
+            <h3 class="section-title">Alerts</h3>
+            <ul>
+                @if(data.alerts){
+                    @for(alert of data.alerts; track alert){
+                        <li>{{alert}}</li>
+                }
+                }
+            </ul>
+            
+        </div>
+    </section>
+    
+} @else {
+      
+}
+@if(isLoading) {
+    <div class="flex-container">
+        <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>   
+    </div>  
+}

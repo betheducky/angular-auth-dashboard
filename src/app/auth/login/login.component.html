@@ -1,1 +1,38 @@
-<p>login works!</p>
+  <h1>Dashboard Login</h1>
+  <app-navbar [user]="currentUser$"></app-navbar>
+  <form [formGroup]="loginForm">
+    <div class="form-group">
+      <label class="form-label" for="email">Email</label>
+      <input class="form-control" type="text" placeholder="Enter email..." formControlName="email" />
+    </div>
+    @if(loginForm.touched || loginForm.dirty){
+     <div>
+      @if(loginForm.get('email')?.hasError('email')){
+        <div class="error-msg">Please enter a valid email.</div>
+      }
+      @if(loginForm.get('email')?.hasError('required')){
+        <div class="error-msg">This is a required field.</div>
+      }
+    </div> 
+    }
+    
+    <div class="form-group">
+        <label class="form-label" for="password">Password</label>
+        <div class="password-container">
+          <input class="form-control" type="password" placeholder="Enter password..." formControlName="password" [type]="hide ? 'password' : 'text'"/>
+          <button type="button" class="btn" (click)="toggleHidePassword()">{{hide ? 'Show' : 'Hide'}}</button>
+        </div>
+        
+    </div>
+    @if(loginForm.dirty || loginForm.touched){
+      @if(loginForm.get('password')?.hasError('required')){
+        <div class="error-msg">This field is required.</div>
+      }
+    }
+    <button class="btn action-btn" type="button" (click)="handleLogin()" [disabled]="loginForm.invalid">
+      Login
+    </button>
+  </form>
+  @if(loginForm.hasError("invalidCredentials")){
+      <div class="form-errors">Invalid credentials. Please try again.</div>
+  }

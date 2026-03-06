@@ -1,12 +1,39 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { DashboardService } from '../../core/service/dashboard.service';
+import { NavbarComponent } from '../../shared/navbar/navbar.component';
+import { User } from '../../models/user.model';
+import { AuthService } from '../../core/service/auth.service';
+import { DashboardData } from '../../models/dashbard.model';
+import { Observable, tap } from 'rxjs';
+import { AsyncPipe } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard-home',
   standalone: true,
-  imports: [],
+  imports: [NavbarComponent, AsyncPipe],
   templateUrl: './dashboard-home.component.html',
   styleUrl: './dashboard-home.component.scss'
 })
-export class DashboardHomeComponent {
+export class DashboardHomeComponent implements OnInit{
+
+  currentUserData$!: Observable< User | null>;
+  dashboardData$!: Observable<DashboardData>;
+  isLoading: boolean = true;
+
+  ngOnInit(){
+    this.loadData();
+}
+
+  loadData(): void {
+    this.currentUserData$ = this.authService.currentUser;
+    this.dashboardData$ = this.dashboardService.getDashboardData().pipe(tap(() => {
+      this.isLoading = false;
+    }));
+  }
+
+
+  constructor(private dashboardService: DashboardService, private authService: AuthService, private router: Router){
+  }
 
 }

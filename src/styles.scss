@@ -1,1 +1,97 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+    background-color: rgb(246, 246, 246);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 50%;
+    margin: auto;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 7rem;
+}
+
+h3, h5, p {
+    text-align: center;
+}
+
+h5, .productivity-summary-text {
+    color: rgb(246, 246, 246);
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+}
+
+.form-group {
+    padding: .5rem 0;
+}
+
+.password-container {
+    display: flex;
+}
+
+.action-btn, .form-errors {
+    margin-top: 1.5rem;
+}
+
+.error-msg {
+    color: red;
+    font-size: .75rem;
+    margin-left: 1rem;
+}
+
+.form-errors {
+    color: red;
+    text-align: center;
+    font-style: italic;
+}
+
+.first-section {
+    margin: 3rem 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.second-section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 4rem;
+    max-width: 90%;
+    margin: auto;
+
+    .section-sub-container {
+        padding: 1rem;
+        min-width: 20rem;
+        width: 30%;
+        border-radius: .25rem;
+        box-shadow: .5px .5px 5px 1px rgb(215, 213, 213);
+    }
+}
+
+.section-title {
+    margin: 1rem 0 2rem;
+}
+
+.carousel-card {
+    border: 1px solid rgb(222, 219, 219);
+    background-color: rgb(114, 114, 114);
+    border-radius: .5rem;
+    padding: 1rem 0;
+    min-width: 75%;
+}
+
+.flex-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 15rem;
+}
+

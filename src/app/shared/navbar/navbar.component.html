@@ -1,1 +1,9 @@
-<p>navbar works!</p>
+<nav>
+          @if(!user){
+            <button class="btn" type="button" (click)="routeToLogin()">Login</button>
+            <button class="btn" type="button" (click)="routeToRegister()">Register</button> 
+        
+        } @else {
+            <button class="btn" type="button" (click)="handleLogout()">Logout</button>
+        }      
+</nav>
