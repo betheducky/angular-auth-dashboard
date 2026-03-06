@@ -1,7 +1,8 @@
+import { Observable } from "rxjs";
 import { User } from "./user.model";
 
 export interface DashboardData {
-    user: User,
+    user: Observable <User | null>,
     projects: string[],
     tasks: string[],
     alerts: string[],

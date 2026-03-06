@@ -3,6 +3,7 @@ import { AuthService } from '../../core/service/auth.service';
 import { User } from '../../models/user.model';
 import { Router } from '@angular/router';
 import { Input } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
@@ -13,7 +14,7 @@ import { Input } from '@angular/core';
 })
 export class NavbarComponent {
 
-  @Input() user: User | null = null;
+  @Input() user!: Observable<User | null>;
 
   constructor(private authService: AuthService, private router: Router){}
 

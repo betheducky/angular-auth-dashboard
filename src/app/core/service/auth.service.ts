@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { User } from '../../models/user.model';
 import { HttpClient } from '@angular/common/http';
-import { of, delay, tap, throwError, BehaviorSubject } from 'rxjs';
+import { of, delay, tap, throwError, BehaviorSubject, Observable } from 'rxjs';
 import { LoginRequest, RegisterRequest } from '../../models/auth.model';
 
 
@@ -14,8 +14,8 @@ export class AuthService {
   private currentUserSubject = new BehaviorSubject<User | null>(null);
   currentUser$ = this.currentUserSubject.asObservable();
 
-  get currentUser(): User | null {
-    return this.currentUserSubject.value;
+  get currentUser(): Observable<User | null> {
+    return this.currentUser$;
   }
 
   get isAuthenticated(): boolean {

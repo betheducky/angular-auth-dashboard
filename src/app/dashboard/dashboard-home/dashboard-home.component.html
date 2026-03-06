@@ -1,5 +1,7 @@
-<h1>Welcome {{currentUser!.name}}</h1>
-<app-navbar [user]="currentUser"></app-navbar>
+@if(currentUserData$ | async; as user){
+    <h1>Welcome {{ user.name }}</h1>
+}
+<app-navbar [user]="currentUserData$"></app-navbar>
 @if(dashboardData$ | async; as data){
     <section class="first-section">
         <h3 class="section-title">Productivity Summary</h3>
@@ -67,9 +69,12 @@
     </section>
     
 } @else {
+      
+}
+@if(isLoading) {
     <div class="flex-container">
         <div class="spinner-border" role="status">
             <span class="visually-hidden">Loading...</span>
         </div>   
-    </div>    
+    </div>  
 }

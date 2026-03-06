@@ -4,9 +4,9 @@ import { NavbarComponent } from '../../shared/navbar/navbar.component';
 import { User } from '../../models/user.model';
 import { AuthService } from '../../core/service/auth.service';
 import { DashboardData } from '../../models/dashbard.model';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
-import { map } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard-home',
@@ -17,20 +17,23 @@ import { map } from 'rxjs';
 })
 export class DashboardHomeComponent implements OnInit{
 
-  currentUser: User | null = null;
+  currentUserData$!: Observable< User | null>;
   dashboardData$!: Observable<DashboardData>;
+  isLoading: boolean = true;
 
   ngOnInit(){
-   this.dashboardData$ = this.dashboardService.getDashboardData();
-   console.log('Current user is:', this.currentUser);
-   console.log('Dashboard data is: ', this.dashboardData$ ? 'PRESENT!' : 'MISSING!');
+    this.loadData();
+}
+
+  loadData(): void {
+    this.currentUserData$ = this.authService.currentUser;
+    this.dashboardData$ = this.dashboardService.getDashboardData().pipe(tap(() => {
+      this.isLoading = false;
+    }));
   }
 
 
-  constructor(private dashboardService: DashboardService, private authService: AuthService){
-    this.authService.currentUser$.subscribe(user => {
-      this.currentUser = user;
-    });
+  constructor(private dashboardService: DashboardService, private authService: AuthService, private router: Router){
   }
 
 }

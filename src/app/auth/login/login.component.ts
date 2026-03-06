@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule, Validators, NonNullableFormBuilder } 
 import { NavbarComponent } from '../../shared/navbar/navbar.component';
 import { User } from '../../models/user.model';
 import { LoginRequest } from '../../models/auth.model';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,7 @@ import { LoginRequest } from '../../models/auth.model';
 })
 export class LoginComponent {
 
-  currentUser: User | null = null;
+  currentUser$!: Observable<User | null>;
   hide: boolean = true;
 
   constructor(private authService: AuthService, private router: Router, private fb: NonNullableFormBuilder){}

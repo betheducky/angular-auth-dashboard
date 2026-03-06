@@ -6,6 +6,7 @@ import { User } from '../../models/user.model';
 import { NavbarComponent } from '../../shared/navbar/navbar.component';
 import { RegisterRequest } from '../../models/auth.model';
 import { ValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-register',
@@ -16,7 +17,7 @@ import { ValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';
 })
 export class RegisterComponent {
 
-  currentUser: User | null = null;
+  currentUser$!: Observable<User | null>;
   hide: boolean = true;
 
   // CHECK IF VALID

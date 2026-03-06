@@ -12,8 +12,8 @@ export class DashboardService {
     constructor(private http: HttpClient, private authService: AuthService) {}
 
     getDashboardData(): Observable<DashboardData> {
-      const mockData = {
-        user: this.authService.currentUser!,
+      const mockData: DashboardData = {
+        user: this.authService.currentUser,
         projects: [
           'Angular Auth Dashboard',
           'Expense Tracker (Angular)',
